@@ -107,9 +107,9 @@ left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_PRIN
 		AND pdo.THEORY_COUPON_DATE &lt;= #{theoryCouponDateEnd}
 	</if>
 	<if test="updateTmBegin != null and updateTmBegin != ''">
-		AND pdo.UPDATE_TM &gt;= #{updateTmBegin}
+		AND pdo.UPDATE_TM &gt;= CONCAT(#{updateTmBegin}, '00:00:00')
 	</if>
 	<if test="updateTmEnd != null and updateTmEnd != ''">
-		AND pdo.UPDATE_TM &lt;= #{updateTmEnd}
+		AND pdo.UPDATE_TM &lt; DATE_ADD(#{date}, INTERVAL 1 DAY)
 	</if>
 </where>
