@@ -10,13 +10,13 @@ select
 	pdo.COUPON_RECORD_DATE as couponRecordDate,
 	pdo.THEORY_COUPON_DATE as theoryCouponDate,
 	pdo.UPDATE_TM as updateTm,
-	pdo.ACCRUAL_FACE_AMT as accrualFaceAmt,
-	pdo.TO_PAY_PRNCPL as toPayPrncpl,
-	pdo.DETAIN_PRNCPL as detainPrncpl,
-	pdo.TO_PAY_INTRST as toPayIntrst,
-	pdo.DETAIN_INTRST as detainIntrst,
-	pdo.TO_PAY_PRNCPL + TO_PAY_INTRST as toPayTotal,
-	pdo.WITHHOLD_REMIT_TAX_EXPENSE as withholdRemitTaxExpense
+	FORMAT(pdo.ACCRUAL_FACE_AMT, 6) as accrualFaceAmt,
+	FORMAT(pdo.TO_PAY_PRNCPL, 2) as toPayPrncpl,
+	FORMAT(pdo.DETAIN_PRNCPL, 2) as detainPrncpl,
+	FORMAT(pdo.TO_PAY_INTRST, 2) as toPayIntrst,
+	FORMAT(pdo.DETAIN_INTRST, 2) as detainIntrst,
+	FORMAT(pdo.TO_PAY_PRNCPL + pdo.TO_PAY_INTRST, 2) as toPayTotal,
+	FORMAT(pdo.WITHHOLD_REMIT_TAX_EXPENSE, 2) as withholdRemitTaxExpense
 from
 	TTRD_SHCH2_PRINCIPAL_DTL_OUT pdo
 left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_PRINCIPAL_AND_COUPON_TYPE' ) d1 on pdo.PRINCIPAL_AND_COUPON_TYPE = d1.DICT_KEY

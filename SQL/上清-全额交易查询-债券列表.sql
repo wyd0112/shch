@@ -3,10 +3,10 @@ select
 	gbi.BOND_CODE as bondCode,
 	gbi.ISIN_CODE as isinCode,
 	gbi.BOND_SNAME as bondSname,
-	gbi.BOND_FACE_AMT as bondFaceAmt,
-	gbi.FULL_PRICE as fullPrice,
-	gbi.CLEAN_PRICE as cleanPrice,
-	gbi.ACCRUED_INTRST as accruedIntrst,
+	FORMAT(gbi.BOND_FACE_AMT, 6) as bondFaceAmt,
+	FORMAT(gbi.FULL_PRICE, 6) as fullPrice,
+	FORMAT(gbi.CLEAN_PRICE, 6) as cleanPrice,
+	FORMAT(gbi.ACCRUED_INTRST, 6) as accruedIntrst,
 	gbi.PLEDGOR_ACCT_NUM as pledgorAcctNum,
 	gbi.PLEDGOR_SNAME as pledgorSname
 from

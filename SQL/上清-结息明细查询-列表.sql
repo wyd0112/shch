@@ -6,7 +6,7 @@ select
 	isqo.ACCRUAL_BEGIN_DT as accrualBeginDt,
 	isqo.ACCRUAL_END_DT as accrualEndDt,
 	isqo.CUR_TERM_ACCRUAL_DAYS as curTermAccrualDays,
-	isqo.DPST_INTRST_AMT as dpstIntrstAmt,
+	FORMAT(isqo.DPST_INTRST_AMT, 2) as dpstIntrstAmt,
 	case
 		when exists (
 			select 1
