@@ -96,3 +96,8 @@ left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_SHCH
 		AND tdo.SETTLE_CCY = #{settleCcy}
 	</if>
 </where>
+order by
+    tdo.TRADE_DATE desc,
+    tdo.BIZ_DATE desc,
+    tdo.INIT_SETTLE_DT desc,
+    tdo.DUE_SETTLE_DT desc

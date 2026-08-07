@@ -39,3 +39,5 @@ left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_BOND
 		AND bbqo.BIZ_DATE &lt;= #{bizDateEnd}
 	</if>
 </where>
+order by
+	bbqo.BIZ_DATE desc

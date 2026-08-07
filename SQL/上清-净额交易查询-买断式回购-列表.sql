@@ -121,3 +121,8 @@ left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_SETT
 		AND tdno.DUE_SETTLE_DT &lt;= #{dueSettleDtEnd}
 	</if>
 </where>
+order by
+	tdno.TRADE_DATE desc,
+	tdno.BIZ_DATE desc,
+	tdno.INIT_SETTLE_DT desc,
+	tdno.DUE_SETTLE_DT desc
