@@ -10,7 +10,7 @@ select
 	pdo.COUPON_RECORD_DATE as couponRecordDate,
 	pdo.THEORY_COUPON_DATE as theoryCouponDate,
 	pdo.UPDATE_TM as updateTm,
-	FORMAT(pdo.ACCRUAL_FACE_AMT, 6) as accrualFaceAmt,
+	FORMAT(pdo.ACCRUAL_FACE_AMT / 10000, 6) as accrualFaceAmt,
 	FORMAT(pdo.TO_PAY_PRNCPL, 2) as toPayPrncpl,
 	FORMAT(pdo.DETAIN_PRNCPL, 2) as detainPrncpl,
 	FORMAT(pdo.TO_PAY_INTRST, 2) as toPayIntrst,

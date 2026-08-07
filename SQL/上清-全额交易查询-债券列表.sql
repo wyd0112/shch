@@ -3,7 +3,7 @@ select
 	gbi.BOND_CODE as bondCode,
 	gbi.ISIN_CODE as isinCode,
 	gbi.BOND_SNAME as bondSname,
-	FORMAT(gbi.BOND_FACE_AMT, 6) as bondFaceAmt,
+	FORMAT(gbi.BOND_FACE_AMT / 10000, 6) as bondFaceAmt,
 	FORMAT(gbi.FULL_PRICE, 6) as fullPrice,
 	FORMAT(gbi.CLEAN_PRICE, 6) as cleanPrice,
 	FORMAT(gbi.ACCRUED_INTRST, 6) as accruedIntrst,
