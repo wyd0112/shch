@@ -113,3 +113,5 @@ left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_PRIN
 		AND pdo.UPDATE_TM &lt; DATE_ADD(#{updateTmEnd}, INTERVAL 1 DAY)
 	</if>
 </where>
+order by
+	theoryCouponDate desc

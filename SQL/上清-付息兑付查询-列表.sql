@@ -43,3 +43,5 @@ left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_PRIN
 		AND pdo.PRINCIPAL_AND_COUPON_TYPE = #{principalAndCouponType}
 	</if>
 </where>
+order by
+	pdo.THEORY_COUPON_DATE desc

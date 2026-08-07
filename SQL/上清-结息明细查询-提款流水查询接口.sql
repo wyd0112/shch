@@ -9,3 +9,5 @@ select
 	DATE(tswl.WITHDRAW_TIME) as withdrawDate
 from
 	TTRD_SHCH2_WITHDRAW_LOG tswl
+order by
+	tswl.WITHDRAW_TIME desc
