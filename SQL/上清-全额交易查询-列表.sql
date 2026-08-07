@@ -57,9 +57,9 @@ left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_SHCH
 	</if>
 	<if test="counterpartyTradeStatus != null and counterpartyTradeStatus != ''">
 		AND (
-			(tdo.BUYER_HOLDER_ACCT_NUM in ('0000018','B8609033') and tdo.BUYER_TRADE_STATUS = #{counterpartyTradeStatus})
+			(tdo.BUYER_HOLDER_ACCT_NUM in ('0000018','B8609033') and tdo.SELLER_TRADE_STATUS = #{counterpartyTradeStatus})
 			or
-			(tdo.BUYER_HOLDER_ACCT_NUM not in ('0000018','B8609033') and tdo.SELLER_TRADE_STATUS = #{counterpartyTradeStatus})
+			(tdo.BUYER_HOLDER_ACCT_NUM not in ('0000018','B8609033') and tdo.BUYER_TRADE_STATUS = #{counterpartyTradeStatus})
 		)
 	</if>
 	<if test="srcTradeId != null and srcTradeId != ''">

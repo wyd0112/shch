@@ -7,7 +7,7 @@ select
 	bbqo.BOND_TITLE_CODE as bondTitleCode,
 	bbqo.BOND_TITLE_NAME as bondTitleName,
 	d1.DICT_VALUE as bondBalDirection,
-	bbqo.BOND_TITLE_BAL as bondTitleBal,
+	FORMAT(bbqo.BOND_TITLE_BAL, 2) as bondTitleBal,
 	bbqo.IMPTIME as imptime,
 	bbqo.UPDATETIME as updatetime
 from

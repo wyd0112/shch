@@ -7,14 +7,14 @@ select
 	dict1.DICT_VALUE as principalAndCouponType,
 	tcrr.BOND_CODE as bondCode,
 	tcrr.BOND_NAME as bondSnameCn,
-	tcrs.USUAL_BALANCE as accrualFaceAmt,
-	tcrs.TEMP_QUANTITY as tempQuantity,
-	tcrs.TEMP_AMOUNT as tempAmount,
+	FORMAT(tcrs.USUAL_BALANCE / 10000, 6) as accrualFaceAmt,
+	FORMAT(tcrs.TEMP_QUANTITY / 10000, 6) as tempQuantity,
+	FORMAT(tcrs.TEMP_AMOUNT / 10000, 2) as tempAmount,
 	'' as detainPrncpl,
 	'' as detainIntrst,
-	a.principalAmount as toPayPrncpl,
-	a.intAmount as toPayIntrst,
-	a.totalPrinInt as toPayTotal
+	FORMAT(a.principalAmount, 2) as toPayPrncpl,
+	FORMAT(a.intAmount, 2) as toPayIntrst,
+	FORMAT(a.totalPrinInt, 2) as toPayTotal
 from
 	TTRD_CBGS2_RESALE_REPORT tcrr
 left join ccdc.TTRD_CBGS2_RESALE_RESULT as tcrs on tcrr.EVENT_ID = tcrs.EVENT_ID
@@ -76,14 +76,14 @@ select
 	d1.DICT_VALUE as principalAndCouponType,
 	pdo.BOND_CODE as bondCode,
 	pdo.BOND_SNAME_CN as bondSnameCn,
-	pdo.ACCRUAL_FACE_AMT as accrualFaceAmt,
+	FORMAT(pdo.ACCRUAL_FACE_AMT / 10000, 6) as accrualFaceAmt,
 	'' as tempQuantity,
 	'' as tempAmount,
-	pdo.DETAIN_PRNCPL as detainPrncpl,
-	pdo.DETAIN_INTRST as detainIntrst,
-	pdo.TO_PAY_PRNCPL as toPayPrncpl,
-	pdo.TO_PAY_INTRST as toPayIntrst,
-	pdo.TO_PAY_PRNCPL + pdo.DETAIN_INTRST as toPayTotal
+	FORMAT(pdo.DETAIN_PRNCPL, 2) as detainPrncpl,
+	FORMAT(pdo.DETAIN_INTRST, 2) as detainIntrst,
+	FORMAT(pdo.TO_PAY_PRNCPL, 2) as toPayPrncpl,
+	FORMAT(pdo.TO_PAY_INTRST, 2) as toPayIntrst,
+	FORMAT(pdo.TO_PAY_PRNCPL + pdo.DETAIN_INTRST, 2) as toPayTotal
 from
 	TTRD_SHCH2_PRINCIPAL_DTL_OUT as pdo
 left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_PRINCIPAL_AND_COUPON_TYPE' ) d1 on pdo.PRINCIPAL_AND_COUPON_TYPE = d1.DICT_KEY
@@ -107,9 +107,9 @@ left join ( select DICT_KEY, DICT_VALUE from nws.DICT where DICT_TYPE = 'SQ_PRIN
 		AND pdo.THEORY_COUPON_DATE &lt;= #{theoryCouponDateEnd}
 	</if>
 	<if test="updateTmBegin != null and updateTmBegin != ''">
-		AND pdo.UPDATE_TM &gt;= #{updateTmBegin}
+		AND pdo.UPDATE_TM &gt;= CONCAT(#{updateTmBegin}, ' 00:00:00')
 	</if>
 	<if test="updateTmEnd != null and updateTmEnd != ''">
-		AND pdo.UPDATE_TM &lt;= #{updateTmEnd}
+		AND pdo.UPDATE_TM &lt; DATE_ADD(#{updateTmEnd}, INTERVAL 1 DAY)
 	</if>
 </where>
